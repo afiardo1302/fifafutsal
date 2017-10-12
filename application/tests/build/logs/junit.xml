@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="6" failures="0" errors="0" time="0.159833">
+    <testsuite name="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" fullPackage="Welcome" tests="6" assertions="6" failures="0" errors="0" time="0.159833">
+      <testcase name="test_index" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.036840"/>
+      <testcase name="test_viewLogin" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="18" assertions="1" time="0.029530"/>
+      <testcase name="test_viewFormArtikel" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="23" assertions="1" time="0.028889"/>
+      <testcase name="test_viewContact" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="28" assertions="1" time="0.025038"/>
+      <testcase name="test_method_404" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="40" assertions="1" time="0.023371"/>
+      <testcase name="test_APPPATH" class="Welcome_test" file="C:\xampp\htdocs\fifafutsal\application\tests\controllers\Welcome_test.php" line="46" assertions="1" time="0.016165"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
