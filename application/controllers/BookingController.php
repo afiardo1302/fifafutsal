@@ -22,6 +22,14 @@ class BookingController extends CI_Controller {
 		$this->load->view('v_form_booking');
 		$this->load->view('footer');  }
 
+	public function verifyBooking($id){
+		$this->BookingModel->verifyBooking($id);
+		redirect(base_url('MyControl/viewOrderHistory')); }
+
+	public function cancelBooking($id){
+		$this->BookingModel->cancelBooking($id);
+		redirect(base_url('MyControl/viewOrderHistory')); }
+
 	public function getJamKosong()
 	{
 		$this->load->helper('security');
@@ -52,15 +60,7 @@ class BookingController extends CI_Controller {
 			$select_box .= $exist; }
 		echo json_encode($select_box); }
 
-		public function test(){
-         $result = $this->BookingModel->getTestId();
-                $id = 0;
-                foreach ($result as $data)
-                {
-                    $id = $data['id'];
-                }  
-                echo "<script>alert('".$id."')</script>";
-        }
+		
 
 	  public function create() {
 
@@ -103,8 +103,7 @@ class BookingController extends CI_Controller {
 		  	$group = $this->session->userdata('group');
 		  	if($group != 2)
 		  	{
-		  		redirect(base_url('MyControl/'));
-		  	}
+		  		redirect(base_url('MyControl/'));}
 		  }
 		  else
 		  {
