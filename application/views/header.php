@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+              <a class="nav-link text-uppercase text-expanded" href="<?php echo base_url(''); ?>">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -48,13 +48,13 @@
               <a class="nav-link text-uppercase text-expanded" href="#">Cek Jadwal</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="#">Form Booking</a>
+              <a class="nav-link text-uppercase text-expanded" href="<?php echo base_url('BookingController'); ?>">Form Booking</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="#">Event Fifa</a>
+              <a class="nav-link text-uppercase text-expanded" href="<?php echo base_url('MyControl/viewEvent'); ?>">Event Fifa</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="#">Tentang Kami</a>
+              <a class="nav-link text-uppercase text-expanded" href="<?php echo base_url('MyControl/viewContact'); ?>">Tentang Kami</a>
             </li>
           </ul>
         </div>

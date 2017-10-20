@@ -8,7 +8,7 @@
 					$judul2 	= str_replace(" ", "-", $judul);
 					$timestamp 	= $row->timestamp;
 					$waktu 		= $row->waktu;
-					$isi 		= $row->isi;
+					$isi 		= $row->deskripsi;
 			?>
 					<div class="card">
 						<div class="card-block px-3">

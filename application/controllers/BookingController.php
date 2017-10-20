@@ -23,12 +23,32 @@ class BookingController extends CI_Controller {
 		$this->load->view('footer');  }
 
 	public function verifyBooking($id){
-		$this->BookingModel->verifyBooking($id);
-		redirect(base_url('MyControl/viewOrderHistory')); }
+		if($this->session->has_userdata('logged_in')){
+		  	$group = $this->session->userdata('group');
+		  	if($group != 2)
+		  	{
+		  		redirect(base_url('MyControl/'));}
+		  
+		  else
+		  {
+                $this->BookingModel->verifyBooking($id);
+		redirect(base_url('MyControl/viewOrderHistory')); } }
+                else {
+                    redirect(base_url('MyControl/'));
+                } }
 
 	public function cancelBooking($id){
-		$this->BookingModel->cancelBooking($id);
-		redirect(base_url('MyControl/viewOrderHistory')); }
+	if($this->session->has_userdata('logged_in')){
+		  	$group = $this->session->userdata('group');
+		  	if($group != 2)
+		  	{
+		  		redirect(base_url('MyControl/'));}
+		  else
+		  {	
+                    $this->BookingModel->cancelBooking($id);
+                        redirect(base_url('MyControl/viewOrderHistory')); } }
+                else {
+                        redirect(base_url('MyControl/')); } }
 
 	public function getJamKosong()
 	{
@@ -86,7 +106,7 @@ class BookingController extends CI_Controller {
                     $start = ltrim(substr($time, 0, 2), '0');
                     $end = (int)$start + $this->input->post('long',TRUE);
                     $over = sprintf('%02d',$end).":00:00";
-
+                    
 					 $data = array(
 						'lapangan' => $this->input->post('field', TRUE),
 						'tanggalMain' => $this->input->post('date', TRUE),

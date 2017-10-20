@@ -36,17 +36,19 @@ table{
 	           
 	            </div>
 	</div>	
-	<form method="post" id="myNavbar" action="<?php echo base_url().'myControl/login'?>">
+	<form method="post" id="myNavbar" action="<?php echo base_url().'Login/do_login'?>" onsubmit="check_if_captcha_is_filled(event)">
 		
 		<table>
 					     
-			<div class="login-page" method="post" id="myNavbar" action="<?php echo base_url().'myControl/login'?>">
+			<div class="login-page" method="post" id="myNavbar" action="<?php echo base_url().'Login/do_login'?>">
 				  <div class="form">
 				  
 				    <form class="login-form">
 				      <input type="text" placeholder="username" name="username" />
-				      <input type="password" placeholder="password" name="pass" />
-				      <button type="submit">login</button>
+				      <input type="password" AUTOCOMPLETE="off" placeholder="password" name="pass" />
+				      <?php echo $widget; ?>
+				      <?php echo $script; ?>
+				      <button type="submit" onclick="check_if_captcha_is_filled(event)">login</button>
 				      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p>
  -->				    </form>
 				  </div>
@@ -55,5 +57,30 @@ table{
 			</tr>
 		</table>
 	</form>
+	<script type="text/javascript">
+      	var allowSubmit = true;
+
+      	
+
+      	function captcha_filled(){
+      		allowSubmit = true;
+      	}
+
+      	function captcha_expired(){
+      		allowSubmit = false;
+      	}
+
+    	function check_if_captcha_is_filled(e){
+    		if(allowSubmit)
+    		{
+    			return true;
+    		}
+    		else
+    		{
+	    		e.preventDefault();
+	    		alert('Mohon isi captcha!');
+	    	}
+    	}  	
+    </script>
 </body>
 </html>

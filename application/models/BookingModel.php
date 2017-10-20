@@ -24,7 +24,7 @@ class BookingModel extends CI_Model {
 	// }
 
 	        function getTestId() {
-        	$this->db->SELECT('id');
+        	$this->db->SELECT('id, status');
         	$this->db->FROM('booking');
         	$this->db->WHERE('lapangan', 'A');
         	$this->db->WHERE('tanggalMain', '2017-10-15');
@@ -32,6 +32,13 @@ class BookingModel extends CI_Model {
         	$query = $this->db->get();
         	return $query->result_array();
         }
+
+    public function getNumRow($id)
+    {
+    	$this->db->WHERE('id',$id);
+    	$query = $this->db->get('booking');
+    	return $query->num_rows();
+    }
 
     public function verifyBooking($id)
     {
@@ -45,6 +52,17 @@ class BookingModel extends CI_Model {
     	$data = array('status' => 'Canceled');
     	$this->db->WHERE('id',$id);
     	$this->db->update('booking',$data);
+    }
+
+    public function getStatus($id)
+    {
+    	$this->db->WHERE('id',$id);
+    	$query = $this->db->get('booking');
+    	$status = "";
+    	foreach ($query->result_array() as $row) {
+    		$status = $row['status'];
+    	}
+    	return $status;
     }    
 
     public function getJamKosong($lapangan,$tanggalMain)

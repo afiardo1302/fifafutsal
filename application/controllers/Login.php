@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 			            'script' => $this->recaptcha->getScriptTag(),
 			        );
 			        $this->load->view('login', $data);
-
+                                
                         }
                     public function viewFormArtikel(){
 			$this->load->view('V_dashboard_header');

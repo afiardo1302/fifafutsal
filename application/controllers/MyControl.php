@@ -24,7 +24,7 @@ class MyControl extends CI_Controller {
 
 			$this->load->library('pagination');
 
-			$config['base_url'] = base_url().'index.php/mycontrol/event/';
+			$config['base_url'] = base_url().'MyControl/viewEvent/';
 			$config['total_rows'] = $jumlah_data;
 			$config['per_page'] = 10;
 			$from = $this->uri->segment(3);
@@ -42,13 +42,29 @@ class MyControl extends CI_Controller {
 //		$this->load->view('index');
 //            }
 		function viewLogin(){
-			$this->load->view('login');	
+			$recaptcha = $this->input->post('g-recaptcha-response');
+			        if (!empty($recaptcha)) {
+			            $response = $this->recaptcha->verifyResponse($recaptcha);
+			            if (isset($response['success']) and $response['success'] === true) {
+			                echo "You got it!";
+			            }
+			        }
+			        $data = array(
+			            'widget' => $this->recaptcha->getWidget(),
+			            'script' => $this->recaptcha->getScriptTag(),
+			        );
+			        $this->load->view('login', $data);
 
 		}
 		
 		function viewContact(){
 			$this->load->view('header');
 			$this->load->view('contact');
+			$this->load->view('footer');
+		}
+		function viewBookingBerhasil(){
+			$this->load->view('header');
+			$this->load->view('V_Booking_berhasil');
 			$this->load->view('footer');
 		}
 

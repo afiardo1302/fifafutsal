@@ -16,13 +16,11 @@ class Pagination_Model extends CI_Model
 	public function fetch_data($limit, $offset) {
 		$this->db->order_by('id','DESC');
 		$query = $this->db->get('article',$limit,$offset);
-		if ($query->num_rows() > 0) {
-			foreach ($query->result() as $row) {
-				$data[] = $row;
-			}
-			return $data;
-		}
-		return false;
+		foreach ($query->result() as $row) {
+                        $data[] = $row;
+                }
+		return $data;
+		
 	}
 }
 ?>
