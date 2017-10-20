@@ -82,10 +82,12 @@ class MyControl_test extends TestCase
             $this->assertRedirect(base_url('MyControl/viewLogin'));
         }
         
-       
+        public function test_viewBerhasil(){
+            $output = $this->request('GET','MyControl/viewBookingBerhasil');
+        }
         
         public function test_viewEvent(){
-            $data = $this->objek2->fetch_data(10,1);
+            $data = $this->objek2->fetch_data(5,1);
             $output = $this->request('GET', 'MyControl/viewEvent');
             foreach ($data as $row){
                 

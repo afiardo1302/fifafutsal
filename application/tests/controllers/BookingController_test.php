@@ -44,6 +44,100 @@ class BookingController_test extends TestCase
 //                $output = $this->request('POST', 'BookingController/create');   
     	}
         
+        public function test_cancel()
+        {
+            $_SESSION['logged_in'] = TRUE;
+            $_SESSION['group'] = 2;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            $status = "";
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+                $status = $data['status'];
+            }
+            $start = $this->objek->getStatus($id);
+            $this->assertEquals($status,$start);
+            $url = "BookingController/cancelBooking/".$id;
+            $output = $this->request('GET',$url);
+            $result = $this->objek->getStatus($id);
+            $this->assertEquals('Canceled',$result);
+        }
+        
+        public function test_cancelNoSession()
+        {
+            $_SESSION['group'] = 2;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+            }
+            $url = "BookingController/cancelBooking/".$id;
+            $output = $this->request('GET',$url);
+        }
+        
+        public function test_cancelWrongSession()
+        {
+            $_SESSION['logged_in'] = TRUE;
+            $_SESSION['group'] = 1;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+            }
+            $url = "BookingController/cancelBooking/".$id;
+            $output = $this->request('GET',$url);
+        }
+        
+        public function test_verify()
+        {
+            $_SESSION['logged_in'] = TRUE;
+            $_SESSION['group'] = 2;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            $status = "";
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+                $status = $data['status'];
+            }
+            $start = $this->objek->getStatus($id);
+            $this->assertEquals($status,$start);
+            $url = "BookingController/verifyBooking/".$id;
+            $output = $this->request('GET',$url);
+            $result = $this->objek->getStatus($id);
+            $this->assertEquals('Paid',$result);
+        }
+        
+        public function test_verifyNoSession()
+        {
+            $_SESSION['group'] = 2;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+            }
+            $url = "BookingController/verifyBooking/".$id;
+            $output = $this->request('GET',$url);
+        }
+
+        public function test_verifyWrongSession()
+        {
+            $_SESSION['logged_in'] = TRUE;
+            $_SESSION['group'] = 1;
+            $hasil = $this->objek->getTestId();
+            $id = 0;
+            foreach($hasil as $data)
+            {
+                $id = $data['id'];
+            }
+            $url = "BookingController/verifyBooking/".$id;
+            $output = $this->request('GET',$url);
+        }
+        
                 public function test_create_salah()
     	{        
                 $awal2 = $this->objek->getCurrentRow();  
@@ -70,12 +164,8 @@ class BookingController_test extends TestCase
 //            $this->assertContains('<title>Fifa - Futsal</title>', $output);
             
         }
-
-//            
-            public function test_do_delete(){
-                $_SESSION['logged_in'] = TRUE;
-                $_SESSION['group'] = 2;
-                $awal = $this->objek->getCurrentRow();
+        
+            public function test_do_deleteNoSession(){
                 $result = $this->objek->getTestId();
                 $id = 0;
                 foreach ($result as $data)
@@ -84,11 +174,40 @@ class BookingController_test extends TestCase
                 }
                 $url = "BookingController/do_delete/".$id;
                 $output = $this->request('GET',$url);
-                $akhir = $this->objek->getCurrentRow();
-                $result = $awal - $akhir;
-                $expected = 1;
-                $this->assertEquals($expected,$result);
             }
+            
+            public function test_do_deleteWrongSession(){
+                $_SESSION['logged_in'] = TRUE;
+                $_SESSION['group'] = 1;
+                $result = $this->objek->getTestId();
+                $id = 0;
+                foreach ($result as $data)
+                {
+                    $id = $data['id'];
+                }
+                $url = "BookingController/do_delete/".$id;
+                $output = $this->request('GET',$url);
+            }
+
+//            
+            public function test_do_delete(){
+                $_SESSION['logged_in'] = TRUE;
+                $_SESSION['group'] = 2;
+                $result = $this->objek->getTestId();
+                $id = 0;
+                foreach ($result as $data)
+                {
+                    $id = $data['id'];
+                }
+                $awal = $this->objek->getNumRow($id);
+                $this->assertEquals(1,$awal);
+                $url = "BookingController/do_delete/".$id;
+                $output = $this->request('GET',$url);
+                $akhir = $this->objek->getNumRow($id);
+                $this->assertEquals(0,$akhir);
+            }
+            
+            
             
         public function test_getJamKosong(){
             $output = $this->request('POST', ['BookingController','getJamKosong'], ['field' => 'A', 'date' => '2017-10-16']);
